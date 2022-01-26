@@ -1,23 +1,22 @@
-
+import React, { useState, Component } from "react";
+import { useParams } from 'react-router'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+  const [pseudo] =  useState(useParams().pseudo)
+  
+
+    return (
+      <div className="App">
+        <h1>Les recettes du Chef {pseudo}</h1>
+        <div className="cards">
+          <div className="card">
+            <h2>Recette n°1</h2>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
 
 export default App;
