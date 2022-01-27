@@ -20,13 +20,14 @@ function App() {
   const [pseudo] = useState(useParams().pseudo)
   const [recettes, setRecettes] = useState([])
 
-  //const cards = Object.keys(recettes).map( key=[key] => <Card details=recettes[key] />)
+  const cards = recettes.map( recette => {return( <Card key={recette.id} details={recette} />)})
+ 
 
   const recettesCollectionRef = collection(db, "recettes");
 
   // Récupération des recettes dans la BDD
   useEffect(() => {
-    const request = query(recettesCollectionRef, orderBy("timestamp", "desc"), limit(25));
+    const request = query(recettesCollectionRef, orderBy("nom", "desc"), limit(25));
     onSnapshot(request, (snapshot) => {
       setRecettes(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -39,7 +40,7 @@ function App() {
       <div className="container px-6 py-4">
         <div className="cards">
           <div className="flex flex-wrap">
-            <Card />
+           {cards}
           </div>
         </div>
       </div>
