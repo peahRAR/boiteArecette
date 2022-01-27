@@ -1,22 +1,29 @@
 import React, { useState, Component } from "react";
-import { useParams } from 'react-router'
+import { useParams } from 'react-router';
+import Card from './components/Card';
+
+import Header from './components/Header'
 
 function App() {
 
-  const [pseudo] =  useState(useParams().pseudo)
-  
+  const [pseudo] = useState(useParams().pseudo)
+  //const [recettes] = {Consummer firestore}
 
-    return (
-      <div className="App">
-        <h1>Les recettes du Chef {pseudo}</h1>
+  //const cards = Object.keys(recettes).map( key=[key] => <Card details=recettes[key] />)
+
+  return (
+    <div className="App">
+      <Header pseudo={pseudo} />
+      <div className="container px-6 py-4">
         <div className="cards">
-          <div className="card">
-            <h2>Recette n°1</h2>
+          <div className="flex flex-wrap">
+            <Card/>
           </div>
         </div>
       </div>
-    );
-  }
+    </div >
+  );
+}
 
 
 export default App;

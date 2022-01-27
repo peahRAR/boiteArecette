@@ -4,7 +4,9 @@ import {BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import reportWebVitals from './reportWebVitals';
 
-import './index.css';
+import './CSS/index.css';
+import './CSS/fonts.css';
+
 import App from './App';
 import NotFound from './components/NotFound';
 import Connexion from './components/Connexion'
