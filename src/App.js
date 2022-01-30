@@ -37,9 +37,9 @@ function App() {
   return (
     <div className="App">
       <Header pseudo={pseudo} />
-      <div className="container px-6 py-4">
+      <div className="px-6 py-4">
         <div className="cards">
-          <div className="flex flex-wrap">
+          <div className="lg:columns-3 md:columns-2 xs:columns-1  space-y-6 ">
            {cards}
           </div>
         </div>
