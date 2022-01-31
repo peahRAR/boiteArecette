@@ -21,7 +21,8 @@ function App() {
   const [recettes, setRecettes] = useState([]);
 
   const cards = recettes.map((recette) => {
-    return <Card key={recette.id} details={recette} />;
+    console.log(recette)
+    return <Card key={recette.id} details={recette.recette} />;
   });
 
   const recettesCollectionRef = collection(db, "recettes");
@@ -30,7 +31,7 @@ function App() {
   useEffect(() => {
     const request = query(
       recettesCollectionRef,
-      orderBy("nom", "desc"),
+      orderBy("recette.nom", "desc"),
       limit(25)
     );
     onSnapshot(request, (snapshot) => {
