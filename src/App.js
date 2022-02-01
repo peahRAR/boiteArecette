@@ -72,7 +72,7 @@ function App() {
           </div>
         </div>
       </div>
-      {modal ? <Modal /> : null}
+      {modal ? <Modal setModal={setModal}/> : null}
       <div className="admin">
         <Admin addRecette={addRecette} />
       </div>

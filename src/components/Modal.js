@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Modal()  {
+function Modal({setModal})  {
 
-    //const handleClose = () => setModal(false);
+    const handleClose = () => setModal(false);
 
         return (
         <div className='z-50 absolute top-0 bottom-0 left-0 right-0'>
@@ -10,7 +10,7 @@ function Modal()  {
                 <div role="alert" className="container w-full flex m-auto absolute top-0 bottom-0 left-0 right-0">
                     <div className="relative z-50 py-8 px-5 md:px-10 w-full m-auto bg-white shadow-md rounded border border-gray-400">
                         <div className="w-full flex justify-start text-gray-600 mb-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-wallet" width="52" height="52" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg onClick={handleClose} xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-wallet" width="52" height="52" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
                                 <path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" />
                                 <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
