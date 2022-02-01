@@ -9,6 +9,7 @@ const Card = ({ details, openModal }) => {
   const handleClickModal = event => {
     event.preventDefault()
     openModal(true);
+    document.body.classList.add('modal-open');
   }
 
   // Systeme de gestion d'une image par default

@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import Admin from "./components/Admin";
 import Modal from "./components/Modal";
 
+import "./CSS/app.css"
+
 import { db } from "./firebase";
 import {
   addDoc,

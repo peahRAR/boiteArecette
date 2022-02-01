@@ -2,13 +2,16 @@ import React from 'react';
 
 function Modal({setModal})  {
 
-    const handleClose = () => setModal(false);
+    const handleClose = () => {
+        setModal(false);
+        document.body.classList.remove('modal-open');
+    }
 
         return (
         <div className='z-50 absolute top-0 bottom-0 left-0 right-0'>
             <div onClick={handleClose} className="fixed py-12 h-full bg-gradient-to-br from-red-600  to-orange-400 opacity-60 transition duration-150 ease-in-out z-10 top-0 right-0 bottom-0 left-0" id="modal"></div>
                 <div role="alert" className="container w-full flex m-auto absolute top-0 bottom-0 left-0 right-0">
-                    <div className="relative z-50 py-8 px-5 md:px-10 w-full m-auto bg-white shadow-md rounded border border-gray-400">
+                    <div className="md:w-2/3 lg:w-3/5 h-2/3 z-50 py-8 px-5 md:px-10 fixed m-auto bg-white shadow-md rounded border border-gray-400 top-0 left-0 right-0 bottom-0">
                         <div className="w-full flex justify-start text-gray-600 mb-3">
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-wallet" width="52" height="52" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
@@ -62,7 +65,7 @@ function Modal({setModal})  {
                             <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">Submit</button>
                             <button onClick={handleClose} className="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm" onclick="modalHandler()">Cancel</button>
                         </div>
-                        <button onClick={handleClose} className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" onclick="modalHandler()" aria-label="close modal" role="button">
+                        <button onClick={handleClose} className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600" onclick="modalHandler()" aria-label="close modal">
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" />
                                 <line x1="18" y1="6" x2="6" y2="18" />
