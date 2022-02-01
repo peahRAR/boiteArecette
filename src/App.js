@@ -4,10 +4,12 @@ import Card from "./components/Card";
 
 import Header from "./components/Header";
 import Admin from "./components/Admin";
+import Modal from "./components/Modal";
 
 import { db } from "./firebase";
 import {
   addDoc,
+  setDoc,
   collection,
   onSnapshot,
   orderBy,
@@ -20,9 +22,12 @@ function App() {
   const [pseudo] = useState(useParams().pseudo);
   const [recettes, setRecettes] = useState([]);
 
+  // Valeur de la modal
+  const [modal, setModal] = useState(false);
+
+  // Gestion de l'affichage des cards
   const cards = recettes.map((recette) => {
-    console.log(recette)
-    return <Card key={recette.id} details={recette.recette} />;
+    return <Card key={recette.id} details={recette.recette} openModal={setModal} />;
   });
 
   const recettesCollectionRef = collection(db, "recettes");
@@ -47,6 +52,16 @@ function App() {
     });
   }
 
+  // Permet de modifier une recette
+  async function modifyRecette(key, newRecette) {
+    const recettes = { ...this.state.recette }
+    recettes[key] = newRecette
+    await setDoc(recettesCollectionRef, {
+      recette: newRecette,
+      pseudo: pseudo,
+    });
+  }
+
   return (
     <div className="App">
       <Header pseudo={pseudo} />
@@ -57,6 +72,7 @@ function App() {
           </div>
         </div>
       </div>
+      {modal ? <Modal /> : null}
       <div className="admin">
         <Admin addRecette={addRecette} />
       </div>

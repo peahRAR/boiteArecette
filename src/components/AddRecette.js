@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import HeroForm from "../assets/img/hero_form.jpg";
 
 export default class AddRecette extends Component {
   state = {
@@ -9,33 +10,36 @@ export default class AddRecette extends Component {
   };
 
   handleChange = event => {
-      const {name, value} = event.target
-      this.setState({[name] : value})
+    const { name, value } = event.target
+    this.setState({ [name]: value })
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    const recette = { ...this.state } 
+    const recette = { ...this.state }
     this.props.addRecette(recette)
 
     //Reset des champs de saisie
     Object.keys(recette).forEach(item => {
-        recette[item] = ''
+      recette[item] = ''
     })
-    this.setState({...recette})
+    this.setState({ ...recette })
   }
 
 
   render() {
     return (
-      <div className="w-full mt-4">
-        <div className="bg-gradient-to-br from-red-600  to-orange-400 h-96"></div>
-        <div className="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
-          <div className="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
+      <div className="w-full">
+        <div className="overlay overflow-hidden relative">
+          <img src={HeroForm} alt="Famille qui prépare à manger" className="absolute top-0 left-0 right-0" />
+          <div className="bg-gradient-to-br opacity-40 from-red-600  to-orange-400 h-96"></div>
+        </div>
+        <div className="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12 absolute m-auto left-0 right-0">
+          <div className="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72 mb-12">
             <p className="text-3xl font-bold leading-7 text-center">
               Ajouter une recette
             </p>
-            <form onSubmit={this.handleSubmit}> 
+            <form onSubmit={this.handleSubmit}>
               <div className="md:flex items-center mt-12">
                 <div className="w-full md:w-1/2 flex flex-col">
                   <label className="font-semibold leading-none">

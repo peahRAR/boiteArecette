@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = ({ pseudo }) => {
   return (
-    <header className="bg-gradient-to-br from-red-600  to-orange-400 fixed top-0 left-0 right-0 text-white h-16 flex justify-start items-center">
+    <header className="z-10 bg-gradient-to-br from-red-600  to-orange-400 fixed top-0 left-0 right-0 text-white h-16 flex justify-start items-center">
       <div className="img-box w-16 p-2 ml-8 mr-4 ">
         <svg
           version="1.1"
