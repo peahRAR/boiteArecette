@@ -25,8 +25,6 @@ function App() {
   const [pseudo] = useState(useParams().pseudo);
   const [recettes, setRecettes] = useState([]);
   
-
-
   // Gestion de l'affichage des cards
   const cards = recettes.map((recette) => {
     return <Card key={recette.id} pseudo={recette.pseudo} id={recette.id} details={recette.recette} updateRecette={modifyRecette} />;

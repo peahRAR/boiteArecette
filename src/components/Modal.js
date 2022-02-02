@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-function Modal({ setModal, nom, image, ingredients, instructions, updateRecette }) {
+function Modal({id, setModal, nom, image, ingredients, instructions, updateRecette }) {
   const [recette, setRecette] = useState({nom , image , ingredients, instructions})
   
     const handleClose = () => {
@@ -9,18 +9,17 @@ function Modal({ setModal, nom, image, ingredients, instructions, updateRecette 
   };
 
   const handleSubmit = () => {
-    console.log("click submit");
-    updateRecette();
+    updateRecette(id , recette);
   };
 
   const handleChange = (event) => {
     let copyRecette = {...recette}
-    console.log(copyRecette)
     const {name , value} = event.target
     copyRecette[name] = value
-    console.log(copyRecette)
 
-    setRecette({copyRecette})
+    console.log(copyRecette)
+    console.log(id)
+    setRecette(copyRecette)
   };
 
   return (
