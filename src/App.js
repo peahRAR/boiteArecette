@@ -14,6 +14,7 @@ import {
   setDoc,
   collection,
   onSnapshot,
+  where,
   orderBy,
   query,
   limit,
@@ -23,13 +24,12 @@ function App() {
   // State
   const [pseudo] = useState(useParams().pseudo);
   const [recettes, setRecettes] = useState([]);
+  
 
-  // Valeur de la modal
-  const [modal, setModal] = useState(false);
 
   // Gestion de l'affichage des cards
   const cards = recettes.map((recette) => {
-    return <Card key={recette.id} details={recette.recette} openModal={setModal} />;
+    return <Card key={recette.id} pseudo={recette.pseudo} id={recette.id} details={recette.recette} updateRecette={modifyRecette} />;
   });
 
   const recettesCollectionRef = collection(db, "recettes");
@@ -38,9 +38,11 @@ function App() {
   useEffect(() => {
     const request = query(
       recettesCollectionRef,
-      orderBy("recette.nom", "desc"),
+      where("pseudo", "==", pseudo),
+      orderBy("recette.nom", "asc"),
       limit(25)
     );
+
     onSnapshot(request, (snapshot) => {
       setRecettes(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     });
@@ -56,6 +58,7 @@ function App() {
 
   // Permet de modifier une recette
   async function modifyRecette(key, newRecette) {
+    console.log('modify')
     const recettes = { ...this.state.recette }
     recettes[key] = newRecette
     await setDoc(recettesCollectionRef, {
@@ -67,14 +70,13 @@ function App() {
   return (
     <div className="App">
       <Header pseudo={pseudo} />
-      <div className="px-6 py-4 mt-16">
+      <div className="px-6 mt-16">
         <div className="cards">
-          <div className="xl:columns-4 lg:columns-3 md:columns-2 xs:columns-1  space-y-6 ">
+          <div className="xl:columns-4 lg:columns-3 md:columns-2 xs:columns-1  space-y-2 ">
             {cards}
           </div>
         </div>
       </div>
-      {modal ? <Modal setModal={setModal}/> : null}
       <div className="admin">
         <Admin addRecette={addRecette} />
       </div>

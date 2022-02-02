@@ -1,14 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
+import Modal from "./Modal";
 
-const Card = ({ details, openModal }) => {
+const Card = ({ details, pseudo, updateRecette, id }) => {
   // Importation des instructions et des ingrédients sous forme de listes
   const ingredients = details.ingredients.split(';').map(item => <li key={item} className="my-2 mx-4 bg-gradient-to-br from-red-600  to-orange-400 text-white p-2 rounded  leading-none flex items-center">{item}</li>);
   const instructions = details.instructions.replaceAll("\\n", "\n").split(/\r?\n/).map(item => <li key={item} className="mx-4 my-4 pl-2">{item}</li>)
 
+  // Valeur de la modal
+  const [modal, setModal] = useState(false);
 
   const handleClickModal = event => {
     event.preventDefault()
-    openModal(true);
+    setModal(true);
     document.body.classList.add('modal-open');
   }
 
@@ -23,7 +26,8 @@ const Card = ({ details, openModal }) => {
   };
 
   return (
-    <div className="w-full card break-inside-avoid-column pb-6 ">
+    <div className="w-full card break-inside-avoid-column py-2 ">
+      {modal ? <Modal setModal={setModal} {...details} pseudo={pseudo} id={id} updateRecette={updateRecette}/> : null}
       <div className="bg-white rounded-lg overflow-hidden shadow-lg">
         <div className="image-box max-h-96 overflow-hidden relative">
           <button type="button" className="modify-box w-10 drop-shadow absolute right-0 mr-2 mt-2" onClick={handleClickModal} >

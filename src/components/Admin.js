@@ -3,9 +3,10 @@ import AddRecette from './AddRecette';
 
 export default class Admin extends Component {
   render() {
+    const {addRecette } = this.props;
     return (
     <div>
-      <AddRecette addRecette={this.props.addRecette}  />
+      <AddRecette addRecette={addRecette}  />
     </div>
     )
   }
