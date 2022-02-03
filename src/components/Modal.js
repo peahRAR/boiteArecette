@@ -16,9 +16,6 @@ function Modal({id, setModal, nom, image, ingredients, instructions, updateRecet
     let copyRecette = {...recette}
     const {name , value} = event.target
     copyRecette[name] = value
-
-    console.log(copyRecette)
-    console.log(id)
     setRecette(copyRecette)
   };
 

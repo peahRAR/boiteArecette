@@ -4,17 +4,17 @@ import Card from "./components/Card";
 
 import Header from "./components/Header";
 import Admin from "./components/Admin";
-import Modal from "./components/Modal";
 
 import "./CSS/app.css"
 
 import { db } from "./firebase";
 import {
   addDoc,
-  setDoc,
   collection,
   onSnapshot,
   where,
+  doc,
+  updateDoc,
   orderBy,
   query,
   limit,
@@ -24,13 +24,14 @@ function App() {
   // State
   const [pseudo] = useState(useParams().pseudo);
   const [recettes, setRecettes] = useState([]);
-  
+
   // Gestion de l'affichage des cards
   const cards = recettes.map((recette) => {
     return <Card key={recette.id} pseudo={recette.pseudo} id={recette.id} details={recette.recette} updateRecette={modifyRecette} />;
   });
 
   const recettesCollectionRef = collection(db, "recettes");
+
 
   // Récupération des recettes dans la BDD
   useEffect(() => {
@@ -55,14 +56,16 @@ function App() {
   }
 
   // Permet de modifier une recette
-  async function modifyRecette(key, newRecette) {
-    console.log('modify')
-    const recettes = { ...this.state.recette }
-    recettes[key] = newRecette
-    await setDoc(recettesCollectionRef, {
-      recette: newRecette,
-      pseudo: pseudo,
-    });
+  async function modifyRecette(id, newRecette) {
+    const updateDocRef = doc(db, "recettes", id);
+    await updateDoc(updateDocRef, {
+      "recette.nom" : newRecette.nom,
+      "recette.image" : newRecette.image,
+      "recette.ingredients" : newRecette.ingredients,
+      "recette.instructions" : newRecette.instructions
+  }).then(
+    console.log("modificaiton réussi")
+  );
   }
 
   return (
