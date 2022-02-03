@@ -13,10 +13,9 @@ function Modal({id, setModal, nom, image, ingredients, instructions, updateRecet
   };
 
   const handleChange = (event) => {
-    let copyRecette = {...recette}
+    event.preventDefault()
     const {name , value} = event.target
-    copyRecette[name] = value
-    setRecette(copyRecette)
+    setRecette({...recette,[name]:value})
   };
 
   return (
@@ -99,7 +98,7 @@ function Modal({id, setModal, nom, image, ingredients, instructions, updateRecet
               <input
                 name="image"
                 className="text-gray-600 focus:outline-none focus:border focus:border-red-600 font-normal w-full h-10 flex items-center pl-16 text-sm border-gray-300 rounded border"
-                value={image}
+                value={recette.image}
                 onChange={handleChange}
               />
             </div>
@@ -144,7 +143,7 @@ function Modal({id, setModal, nom, image, ingredients, instructions, updateRecet
               <textarea
                 name="ingredients"
                 className="text-gray-600 border-r-2 focus:outline-none focus:border resize-none focus:border-red-600 font-normal w-full h-10 flex items-center pl-3 pr-12 text-sm border-gray-300 rounded border"
-                value={ingredients}
+                value={recette.ingredients}
                 onChange={handleChange}
               ></textarea>
             </div>
@@ -160,7 +159,7 @@ function Modal({id, setModal, nom, image, ingredients, instructions, updateRecet
                 type="text"
                 rows="5"
                 className="mb-8  text-gray-600 focus:outline-none resize-none focus:border focus:border-red-600 outline-border-red-600 font-normal w-full flex items-center pl-3 text-sm border-gray-300 rounded border"
-                value={instructions}
+                value={recette.instructions}
                 onChange={handleChange}
               ></textarea>
             </div>

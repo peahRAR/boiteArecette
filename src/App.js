@@ -15,6 +15,7 @@ import {
   where,
   doc,
   updateDoc,
+  deleteDoc,
   orderBy,
   query,
   limit,
@@ -27,11 +28,10 @@ function App() {
 
   // Gestion de l'affichage des cards
   const cards = recettes.map((recette) => {
-    return <Card key={recette.id} pseudo={recette.pseudo} id={recette.id} details={recette.recette} updateRecette={modifyRecette} />;
+    return <Card key={recette.id} pseudo={recette.pseudo} id={recette.id} details={recette.recette} deleteRecette={deleteRecette} updateRecette={modifyRecette} />;
   });
 
   const recettesCollectionRef = collection(db, "recettes");
-
 
   // Récupération des recettes dans la BDD
   useEffect(() => {
@@ -59,13 +59,16 @@ function App() {
   async function modifyRecette(id, newRecette) {
     const updateDocRef = doc(db, "recettes", id);
     await updateDoc(updateDocRef, {
-      "recette.nom" : newRecette.nom,
-      "recette.image" : newRecette.image,
-      "recette.ingredients" : newRecette.ingredients,
-      "recette.instructions" : newRecette.instructions
-  }).then(
-    console.log("modificaiton réussi")
-  );
+      "recette.nom": newRecette.nom,
+      "recette.image": newRecette.image,
+      "recette.ingredients": newRecette.ingredients,
+      "recette.instructions": newRecette.instructions
+    })
+  }
+
+  // Permet de supprimer une recette
+  async function deleteRecette(id){
+    await deleteDoc(doc(db, "recettes", id));
   }
 
   return (

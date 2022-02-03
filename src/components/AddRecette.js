@@ -46,6 +46,7 @@ export default class AddRecette extends Component {
                     Nom du plat
                   </label>
                   <input
+                    required
                     value={this.state.nom}
                     onChange={this.handleChange}
                     name="nom"
@@ -70,6 +71,7 @@ export default class AddRecette extends Component {
                     Ingrédients
                   </label>
                   <textarea
+                    required
                     value={this.state.ingredients}
                     onChange={this.handleChange}
                     name="ingredients"
@@ -85,6 +87,7 @@ export default class AddRecette extends Component {
                     Instructions
                   </label>
                   <textarea
+                    required
                     value={this.state.instructions}
                     onChange={this.handleChange}
                     name="instructions"
