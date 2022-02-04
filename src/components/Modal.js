@@ -13,7 +13,6 @@ function Modal({id, setModal, nom, image, ingredients, instructions, updateRecet
   };
 
   const handleChange = (event) => {
-    event.preventDefault()
     const {name , value} = event.target
     setRecette({...recette,[name]:value})
   };
@@ -29,7 +28,7 @@ function Modal({id, setModal, nom, image, ingredients, instructions, updateRecet
         role="alert"
         className="container w-full flex m-auto absolute top-0 bottom-0 left-0 right-0"
       >
-        <div className="md:w-2/3 lg:w-3/5 h-2/3 z-50 py-8 px-5 md:px-10 fixed m-auto bg-white shadow-md rounded border border-gray-400 top-0 left-0 right-0 bottom-0">
+        <div className="md:w-2/3 lg:w-3/5 h-2/3 flex flex-col justify-center z-50 py-8 px-5 md:px-10 fixed m-auto bg-white shadow-md rounded border border-gray-400 top-0 left-0 right-0 bottom-0">
           <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">
             Modifier votre recette
           </h1>

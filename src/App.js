@@ -63,7 +63,9 @@ function App() {
       "recette.image": newRecette.image,
       "recette.ingredients": newRecette.ingredients,
       "recette.instructions": newRecette.instructions
-    })
+    }).then(
+      console.log("modification réussie")
+    )
   }
 
   // Permet de supprimer une recette
