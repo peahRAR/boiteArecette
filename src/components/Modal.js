@@ -17,6 +17,8 @@ function Modal({id, setModal, nom, image, ingredients, instructions, updateRecet
     setRecette({...recette,[name]:value})
   };
 
+
+
   return (
     <div className="z-50 absolute top-0 bottom-0 left-0 right-0">
       <div

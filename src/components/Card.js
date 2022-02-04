@@ -3,8 +3,8 @@ import Modal from "./Modal";
 
 const Card = ({ details, pseudo, updateRecette, id }) => {
   // Importation des instructions et des ingrédients sous forme de listes
-  const ingredients = details.ingredients.split(';').map(item => <li key={item} className="my-2 mx-4 bg-gradient-to-br from-red-600  to-orange-400 text-white p-2 rounded  leading-none flex items-center">{item}</li>);
-  const instructions = details.instructions.replaceAll("\\n", "\n").split(/\r?\n/).map(item => <li key={item} className="mx-4 my-4 pl-2">{item}</li>)
+  const ingredients = details.ingredients.split(';').map(item => <li key={item} className="my-2 mx-4 bg-gradient-to-br from-red-600  to-orange-400 text-white p-2 rounded  leading-none flex items-center text-center">{item}</li>);
+  const instructions = details.instructions.replaceAll("\\n", "\n").split(/\r?\n/).map(item => <li key={item}  className="mx-4 my-4 pl-2">{item}</li>)
 
   // Valeur de la modal
   const [modal, setModal] = useState(false);
