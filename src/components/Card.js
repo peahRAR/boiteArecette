@@ -1,40 +1,143 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Modal from "./Modal";
 
-const Card = ({ details, pseudo, updateRecette, id }) => {
+const Card = ({ details, pseudo, updateRecette, id, deleteRecette }) => {
   // Importation des instructions et des ingrédients sous forme de listes
-  const ingredients = details.ingredients.split(';').map(item => <li key={item} className="my-2 mx-4 bg-gradient-to-br from-red-600  to-orange-400 text-white p-2 rounded  leading-none flex items-center text-center">{item}</li>);
-  const instructions = details.instructions.replaceAll("\\n", "\n").split(/\r?\n/).map(item => <li key={item}  className="mx-4 my-4 pl-2">{item}</li>)
+  const ingredients = details.ingredients.split(";").map((item) => (
+    <li
+      key={item}
+      className="my-2 mx-4 bg-gradient-to-br from-red-600  to-orange-400 text-white p-2 rounded  leading-none flex items-center text-center"
+    >
+      {item}
+    </li>
+  ));
+  const instructions = details.instructions
+    .replaceAll("\\n", "\n")
+    .split(/\r?\n/)
+    .map((item) => (
+      <li key={item} className="mx-4 my-4 pl-2">
+        {item}
+      </li>
+    ));
 
   // Valeur de la modal
   const [modal, setModal] = useState(false);
 
-  const handleClickModal = event => {
-    event.preventDefault()
+  const handleClickModal = (event) => {
+    event.preventDefault();
     setModal(true);
-    document.body.classList.add('modal-open');
-  }
+    document.body.classList.add("modal-open");
+  };
+
+  const handleDelete = () => {
+    let text = "Etes vous sur de vouloir supprimer ?";
+    if (window.confirm(text) === true) {
+      deleteRecette(id)
+    } 
+    return
+  };
 
   // Systeme de gestion d'une image par default
-  const requireImg = path => {
+  const requireImg = (path) => {
     try {
-      return require(`../assets/img/${path}`)
-
+      return require(`../assets/img/${path}`);
     } catch (error) {
-      return require(`../assets/img/default-img.jpg`)
+      return require(`../assets/img/default-img.jpg`);
     }
   };
 
   return (
     <div className="w-full card break-inside-avoid-column py-2 ">
-      {modal ? <Modal setModal={setModal} {...details} pseudo={pseudo} id={id} updateRecette={updateRecette}/> : null}
+      {modal ? (
+        <Modal
+          setModal={setModal}
+          {...details}
+          pseudo={pseudo}
+          id={id}
+          updateRecette={updateRecette}
+        />
+      ) : null}
       <div className="bg-white rounded-lg overflow-hidden shadow-lg">
         <div className="image-box max-h-96 overflow-hidden relative">
-          <button type="button" className="modify-box w-10 drop-shadow absolute right-0 mr-2 mt-2" onClick={handleClickModal} >
-            <svg className="svg-icon drop-shadow cursor-pointer hover:fill-red-500 fill-white" viewBox="0 0 20 20">
-              <path d="M10,2.172c-4.324,0-7.828,3.504-7.828,7.828S5.676,17.828,10,17.828c4.324,0,7.828-3.504,7.828-7.828S14.324,2.172,10,2.172M10,17.004c-3.863,0-7.004-3.141-7.004-7.003S6.137,2.997,10,2.997c3.862,0,7.004,3.141,7.004,7.004S13.862,17.004,10,17.004M10,8.559c-0.795,0-1.442,0.646-1.442,1.442S9.205,11.443,10,11.443s1.441-0.647,1.441-1.443S10.795,8.559,10,8.559 M10,10.619c-0.34,0-0.618-0.278-0.618-0.618S9.66,9.382,10,9.382S10.618,9.661,10.618,10S10.34,10.619,10,10.619 M14.12,8.559c-0.795,0-1.442,0.646-1.442,1.442s0.647,1.443,1.442,1.443s1.442-0.647,1.442-1.443S14.915,8.559,14.12,8.559 M14.12,10.619c-0.34,0-0.618-0.278-0.618-0.618s0.278-0.618,0.618-0.618S14.738,9.661,14.738,10S14.46,10.619,14.12,10.619 M5.88,8.559c-0.795,0-1.442,0.646-1.442,1.442s0.646,1.443,1.442,1.443S7.322,10.796,7.322,10S6.675,8.559,5.88,8.559 M5.88,10.619c-0.34,0-0.618-0.278-0.618-0.618S5.54,9.382,5.88,9.382S6.498,9.661,6.498,10S6.22,10.619,5.88,10.619"></path>
-            </svg>
-          </button>
+          <div className="admin-box bg-white absolute top-0 right-0 rounded-bl-lg flex">
+            <button
+              type="button"
+              className="modify-box w-5 ml-2 drop-shadow right-0 mr-2"
+              onClick={handleClickModal}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 64 64"
+                aria-labelledby="title"
+                aria-describedby="desc"
+                role="img"
+                className="stroke-gray-800 hover:stroke-red-500"
+              >
+                <title>Modifier</title>
+                <desc>A line styled icon from Orion Icon Library.</desc>
+                <circle
+                  data-name="layer3"
+                  cx="8"
+                  cy="32"
+                  r="6"
+                  fill="none"
+                  stroke-miterlimit="10"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                ></circle>
+                <circle
+                  data-name="layer2"
+                  cx="56"
+                  cy="32"
+                  r="6"
+                  fill="none"
+                  stroke-miterlimit="10"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                ></circle>
+                <circle
+                  data-name="layer1"
+                  cx="32"
+                  cy="32"
+                  r="6"
+                  fill="none"
+                  stroke-miterlimit="10"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                ></circle>
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              className="delete-box w-8 right-0"
+              onClick={handleDelete}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 64 64"
+                aria-labelledby="title"
+                aria-describedby="desc"
+                role="img"
+                className=" stroke-gray-800 hover:stroke-red-500"
+              >
+                <title>Delete</title>
+                <desc>A line styled icon from Orion Icon Library.</desc>
+                <path
+                  data-name="layer1"
+                  stroke-miterlimit="10"
+                  stroke-width="2"
+                  d="M41.999 20.002l-22 22m22 0L20 20"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                ></path>
+              </svg>
+            </button>
+          </div>
+
           <img
             src={requireImg(details.image)}
             alt={details.nom}
@@ -54,9 +157,7 @@ const Card = ({ details, pseudo, updateRecette, id }) => {
         </div>
         <div className="task pr-4 pl-6 py-2">
           <h3 className="inline border-b-2">Instructions :</h3>
-          <ol className="list-decimal my-4 ">
-            {instructions}
-          </ol>
+          <ol className="list-decimal my-4 ">{instructions}</ol>
         </div>
       </div>
     </div>

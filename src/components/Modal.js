@@ -1,22 +1,27 @@
 import React, {useState} from "react";
+import { db } from "../firebase";
+
 
 function Modal({id, setModal, nom, image, ingredients, instructions, updateRecette }) {
+
   const [recette, setRecette] = useState({nom , image , ingredients, instructions})
   
-    const handleClose = () => {
+  const handleClose = () => {
     setModal(false);
     document.body.classList.remove("modal-open");
   };
 
-  const handleSubmit = () => {
-    updateRecette(id , recette);
-  };
-
+  
   const handleChange = (event) => {
     const {name , value} = event.target
     setRecette({...recette,[name]:value})
   };
-
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    updateRecette(id, recette);
+    handleClose()
+  };
 
 
   return (

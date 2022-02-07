@@ -66,14 +66,13 @@ function App() {
 
   // Permet de modifier une recette
   async function modifyRecette(id, newRecette) {
-      console.log(id);
-      const updateDocRef = doc(db, "recettes", id);
-      await updateDoc(updateDocRef, {
-        "recette.nom" : newRecette.nom,
-        "recette.image": newRecette.image,
-        "recette.ingredients": newRecette.ingredients,
-        "recette.instructions": newRecette.instructions,
-      })
+    const updateDocRef = doc(db, "recettes", id);
+    await updateDoc(updateDocRef, {
+      "recette.nom": newRecette.nom,
+      "recette.image": newRecette.image,
+      "recette.ingredients": newRecette.ingredients,
+      "recette.instructions": newRecette.instructions,
+    });
   }
 
 
